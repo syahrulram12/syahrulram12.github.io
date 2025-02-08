@@ -99,7 +99,9 @@ function Column({ stocks }) {
           <div className="float-left">Product Name : {stock.product_name}</div>
           <div className="float-right">Size : {stock.size}</div>
           <div className="float-left">Variant :{stock.variant}</div>
-          <div className="float-right">Production Date{stock.production_date}</div>
+          <div className="float-right">
+            Production Date{stock.production_date}
+          </div>
           <div className="float-left">
             Total Scanned : {stock.scanned} / {stock.total}
           </div>
