@@ -49,30 +49,6 @@ export function AuthForm() {
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
-            {!isLogin && (
-              <div>
-                <label htmlFor="name" className="sr-only">
-                  Name
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <UserIcon className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required={!isLogin}
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                    placeholder="Name"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                  />
-                </div>
-              </div>
-            )}
             <div>
               <label htmlFor="email" className="sr-only">
                 Email address
@@ -149,22 +125,6 @@ export function AuthForm() {
             </button>
           </div>
         </form>
-
-        <div className="text-center">
-          <button
-            type="button"
-            onClick={() => {
-              setIsLogin(!isLogin);
-              setError("");
-              setFormData({ email: "", password: "", name: "" });
-            }}
-            className="text-sm text-blue-600 hover:text-blue-500"
-          >
-            {isLogin
-              ? "Need an account? Sign up"
-              : "Already have an account? Sign in"}
-          </button>
-        </div>
       </div>
     </div>
   );
