@@ -30,7 +30,7 @@ function NFCApp() {
 
   const startScanning = async () => {
     if (!supported) return;
-
+    document.getElementById("my_modal_1").showModal();
     try {
       const ndef = new (window as any).NDEFReader();
       await ndef.scan();
@@ -58,7 +58,7 @@ function NFCApp() {
 
           try {
             const token = localStorage.getItem("auth_token");
-            await fetch(`${env.apiUrl}/nfc/scan`, {
+            await fetch(`${env.apiUrl}/serial-number-link`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -66,8 +66,6 @@ function NFCApp() {
               },
               body: JSON.stringify({
                 serialNumber,
-                records,
-                timestamp: new Date().toISOString(),
               }),
             });
           } catch (apiError) {
@@ -146,7 +144,7 @@ function NFCApp() {
           </div>
         </div>
         <div className="flex mb-8">
-          <div className="flex items-center space-x-4 ms-auto">
+          <div className="flex justify-between items-center space-x-4 w-screen">
             <span className="text-gray-600">Welcome, {user?.name}</span>
             <button
               onClick={logout}
@@ -208,6 +206,20 @@ function NFCApp() {
                   <Nfc className="w-5 h-5 mr-2" />
                   Start NFC Scan
                 </button>
+                <dialog id="my_modal_1" className="modal">
+                  <div className="modal-box">
+                    <h3 className="font-bold text-lg">Hello!</h3>
+                    <p className="py-4">
+                      Press ESC key or click the button below to close
+                    </p>
+                    <div className="modal-action">
+                      <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn">Close</button>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
 
                 <div className="bg-white rounded-lg shadow-lg p-6">
                   <h2 className="text-2xl font-semibold mb-4 flex items-center">
