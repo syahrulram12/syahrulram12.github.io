@@ -133,7 +133,7 @@ function NFCApp() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-4xl mx-auto p-6">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
             {activeTab === "nfc" ? (
               <Nfc className="w-12 h-12 text-blue-600 mr-4" />
@@ -144,7 +144,9 @@ function NFCApp() {
               {activeTab === "nfc" ? "NFC Reader & Writer" : "Stock Management"}
             </h1>
           </div>
-          <div className="flex items-center space-x-4">
+        </div>
+        <div className="flex mb-8">
+          <div className="flex items-center space-x-4 ms-auto">
             <span className="text-gray-600">Welcome, {user?.name}</span>
             <button
               onClick={logout}

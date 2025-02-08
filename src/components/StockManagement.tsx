@@ -54,9 +54,9 @@ function Page() {
     fetchStockList();
   }
 
-  async function fetchStockList() {
-    setStocklist([]);
-    await getStock({
+  function fetchStockList() {
+    console.log("test fetching");
+    getStock({
       page,
       length,
       search,
@@ -94,20 +94,25 @@ function Column({ stocks }) {
   console.log(stocks);
   return (
     <>
-      {Object(stocks).map((stock?: any) => (
-        <div className="p-2 border border-2 shadow-md my-2" key={stock.id}>
-          <div className="float-left">Product Name : {stock.product_name}</div>
-          <div className="float-right">Size : {stock.size}</div>
-          <div className="float-left">Variant :{stock.variant}</div>
-          <div className="float-right">
-            Production Date{stock.production_date}
+      {Object(stocks).length > 0 &&
+        Object(stocks).map((stock?: any) => (
+          <div className="p-2 border border-2 shadow-md my-2 flex" key={stock.id}>
+            <div className="w-3/6">
+              <p className="m-0">Product Name : {stock.product_name}</p>
+              <p className="m-0">Variant :{stock.variant}</p>
+              <p className="m-0">
+                Total Scanned : {stock.scanned} / {stock.total}
+              </p>
+            </div>
+            <div className="w-3/6 float-right">
+              <p className="m-0">Size : {stock.size}</p>
+              <p className="m-0">
+                Production Date{stock.production_date}
+              </p>
+              <p className="m-0">Stock At : {stock.stock_at}</p>
+            </div>
           </div>
-          <div className="float-left">
-            Total Scanned : {stock.scanned} / {stock.total}
-          </div>
-          <div className="float-right">Stock At : {stock.stock_at}</div>
-        </div>
-      ))}
+        ))}
     </>
   );
 }
