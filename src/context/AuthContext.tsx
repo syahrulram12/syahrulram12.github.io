@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { User, LoginCredentials, RegisterCredentials } from "../types/auth";
 import { env } from "../config/env";
+import { Navigate, useNavigate } from "react-router-dom";
 
 interface AuthContextType {
   user: User | null;
@@ -16,9 +17,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-
+  const token = localStorage.getItem("auth_token");
   useEffect(() => {
-    const token = localStorage.getItem("auth_token");
     if (token) {
       fetchUser(token);
     } else {
@@ -81,9 +81,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(userData);
   };
 
-  const logout = () => {
-    localStorage.removeItem("auth_token");
-    setUser(null);
+  const logout = async () => {
+    const response = await fetch(`${env.apiUrl}/logout`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.ok) {
+      localStorage.removeItem("auth_token");
+      setUser(null);
+    }
   };
 
   const changeLoading = (status: boolean) => {

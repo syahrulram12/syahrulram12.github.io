@@ -1,12 +1,3 @@
-export interface StockItem {
-  id: string;
-  name: string;
-  sku: string;
-  quantity: number;
-  lastUpdated: string;
-  nfcId?: string;
-}
-
 export interface StockLists {
   current_page: number;
   data?: [
@@ -80,14 +71,4 @@ export interface StockListRequest {
 
 export interface StockDetailRequest {
   stock_id: number;
-}
-
-export interface StockMovement {
-  id: string;
-  itemId: string;
-  type: "in" | "out";
-  quantity: number;
-  timestamp: string;
-  notes: string;
-  userId: string;
 }
